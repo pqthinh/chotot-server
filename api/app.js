@@ -152,8 +152,13 @@ app.post('/login', (req, res)=>{
     })
 })
 
-app.listen(4000, ()=>{
-    console.log("App running at port 4000")
-})
+
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT);
+
+// app.listen(4000, ()=>{
+//     console.log("App running at port 4000")
+// })
 
 module.exports = app
