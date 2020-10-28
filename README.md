@@ -16,3 +16,12 @@ Example: https://localhost:4000/posts
 
 Change it to: http://localhost:4000/posts
 ```
+
+### git command
+```
+git status
+git add --all
+git commit -m "Add Procfile for heroku"
+git push
+
+```

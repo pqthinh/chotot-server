@@ -2,7 +2,7 @@ const express = require('express')
 const app =express()
 const mysql =  require('mysql')
 const bodyParser = require('body-parser')
-const { Router } = require('express')
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true
@@ -22,7 +22,7 @@ conn.connect(function(err) {
     else console.log("Connected")
 });
 
-// rsouter
+// router
 
 app.get('/', (req,res)=>{
     res.json({send:"Hello world"})
