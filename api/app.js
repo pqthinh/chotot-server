@@ -7,17 +7,19 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-const conn = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    password: '',
-    database: 'chotot'
-})
+var conn = mysql.createConnection({
+    host: 'remotemysql.com',
+    user: 'ZduVtEX3Nd',
+    password: 'bleVGxRMN2',
+    database: 'ZduVtEX3Nd',
+    port: 3306
+});
 
-conn.connect((err)=>{
-    if(err) throw err
-    console.log('Connected to database')
-})
+// connect to mysql
+conn.connect(function(err) {
+    if(err) console.log(err)
+    else console.log("Connected")
+});
 
 app.get('/', (req,res)=>{
     res.json({send:"Hello world"})
@@ -32,6 +34,7 @@ app.get('/tindang', (req, res)=>{
     conn.query(sql,(err, result)=>{
         if (err ) throw err
         res.json({result})
+        console.log(result)
     })
 })
 
