@@ -42,4 +42,4 @@ app.get('/tindang', (req, res)=>{
 const PORT = process.env.PORT || 4000;
 app.listen(PORT)
 
-module.exports = app
+// module.exports = app
