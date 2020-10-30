@@ -15,9 +15,7 @@ app.get('/', (req,res)=>{
     res.json({send:"This page is only for test purpose part 4"})
 })
 
-app.post('/', (req,res)=>{
-    res.send('Post request to the home page')
-})
+
 app.get('/tindang', (req, res)=>{
     let sql =  "select * from tindang order by 1"
     conn.query(sql,(err, result)=>{
@@ -27,9 +25,9 @@ app.get('/tindang', (req, res)=>{
     })
 })
 
-app.get('/tindang/:newsId', (req, res){
-    res.send(req.params)
-})
+//app.get('/tindang/:newsId', (req, res){
+//    res.send(req.params)
+//})
 // set port
 
 const PORT = process.env.PORT || 4000;
