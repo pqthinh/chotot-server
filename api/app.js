@@ -12,7 +12,7 @@ const [func, conn ] = require('../connect')
 // router
 
 app.get('/', (req,res)=>{
-    res.json({send:"Hello world"})
+    res.json({send:"This page is only for test purpose"})
 })
 
 app.get('/tindang', (req, res)=>{
