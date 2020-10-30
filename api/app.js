@@ -12,8 +12,9 @@ const [func, conn ] = require('../connect')
 // router
 
 app.get('/', (req,res)=>{
-    res.json({send:"Hello world"})
+    res.json({send:"This page is only for test purpose part 4"})
 })
+
 
 app.get('/tindang', (req, res)=>{
     let sql =  "select * from tindang order by 1"
@@ -22,6 +23,10 @@ app.get('/tindang', (req, res)=>{
         res.json({result})
         console.log(result)
     })
+})
+
+app.get('/tindang/:newsType', (req, res)=>{
+    res.json({send: req.params})
 })
 
 // set port
