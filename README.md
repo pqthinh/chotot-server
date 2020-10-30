@@ -6,16 +6,7 @@
 ### run 
 `npm run server`
 
-### databse in file chotot.sql 
-
-
-```
-This type of issue comes when you use https instead of http. Change the URL to use http.
-
-Example: https://localhost:4000/posts
-
-Change it to: http://localhost:4000/posts
-```
+### databse in file chotot.sql when server crash (-->import data to this file)
 
 ### git command
 ```
@@ -24,4 +15,6 @@ git add --all
 git commit -m "Add Procfile for heroku"
 git push
 
+check log heroku: `heroku logs --tail`
+check error: https://devcenter.heroku.com/articles/error-codes#h13-connection-closed-without-response
 ```
