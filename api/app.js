@@ -25,9 +25,10 @@ app.get('/tindang', (req, res)=>{
     })
 })
 
-//app.get('/tindang/:newsId', (req, res){
-//    res.send(req.params)
-//})
+app.get('/tindang/:newsType', (req, res)=>{
+    res.json({send: req.params})
+})
+
 // set port
 
 const PORT = process.env.PORT || 4000;
