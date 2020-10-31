@@ -1,5 +1,5 @@
 module.exports = app => {
     const news = require("../controllers/news.controllers.js");
-    app.get("/news", news.findAll);
-    app.get("/news/:newsId", news.findOne);
+    app.get("/tindang", news.findAll);
+    app.get("/tindang/:newsId", news.findOne);
   };
