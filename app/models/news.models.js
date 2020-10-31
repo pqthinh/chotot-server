@@ -22,7 +22,7 @@ News.getAll = result => {
   };
 
 News.findById = (newsId, result) => {
-    sql.query("SELECT * FROM tindang", (err, res) => {
+    sql.query("SELECT * FROM tindang where id = newsId", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
