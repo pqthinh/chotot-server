@@ -11,16 +11,22 @@ function handleDisconnect() {
     user: dbConfig.USER,
     password: dbConfig.PASSWORD,
     database: dbConfig.DB,
-    host: dbConfig.HOST
+    host: dbConfig.HOST,
+    connectionLimit : 100,
+    waitForConnections : true,
+    queueLimit :0,
+    debug    :  true,
+    wait_timeout : 28800,
+    connect_timeout :10
   });
 
   // open the MySQL connection
   connection.connect(error => {
     if (error) {
       console.log('error when connecting to db:', err);
-      setTimeout(handleDisconnect, 2000);
+      setTimeout(handleDisconnect, 2000)
     }
-    console.log("Successfully connected to the database.");
+    console.log("Successfully connected to the database.")
 
   });                                 
                                           
@@ -28,8 +34,9 @@ function handleDisconnect() {
       console.log('db error', err);
       if(err.code === 'PROTOCOL_CONNECTION_LOST') { 
           handleDisconnect();                         
-      } else {                                      
-          throw err;                                  
+      } else {           
+          console.log(err)                           
+          throw err                               
       }
   });
 }
