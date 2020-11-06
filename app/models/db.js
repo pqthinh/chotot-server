@@ -32,7 +32,14 @@ function handleDisconnect() {
                                           
   connection.on('error', function(err) {
       console.log('db error', err);
-      if(err.code === 'PROTOCOL_CONNECTION_LOST') { 
+      // err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR'
+      if(err) { 
+          connection.end(function(err) {
+            if (err) {
+              return console.log('error:' + err.message);
+            }
+            console.log('Close the database connection.');
+          });
           handleDisconnect();                         
       } else {           
           console.log(err)                           
