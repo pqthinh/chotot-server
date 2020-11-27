@@ -16,6 +16,7 @@ Banner.getAll = result => {
       console.log("Danh muc tin: ", res);
       result(null, res);
     });
+    
   };
 
   module.exports = Banner;

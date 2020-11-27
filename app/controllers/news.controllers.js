@@ -11,6 +11,18 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.search = (req, res) => {
+  News.search(req ,(err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving news."
+      });
+    else res.send(data);
+  });
+};
+
+
 exports.findOne = (req, res) => {
     News.findById(req.params.newsId, (err, data) => {
       if (err) {

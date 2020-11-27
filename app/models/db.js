@@ -11,7 +11,6 @@ function handleDisconnect() {
     user: dbConfig.USER,
     password: dbConfig.PASSWORD,
     database: dbConfig.DB,
-    host: dbConfig.HOST
   });
 
   // open the MySQL connection
