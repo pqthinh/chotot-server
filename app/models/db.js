@@ -11,13 +11,6 @@ function handleDisconnect() {
     user: dbConfig.USER,
     password: dbConfig.PASSWORD,
     database: dbConfig.DB,
-    host: dbConfig.HOST,
-    connectionLimit : 100,
-    waitForConnections : true,
-    queueLimit :0,
-    debug    :  true,
-    wait_timeout : 28800,
-    connect_timeout :10
   });
 
   // open the MySQL connection

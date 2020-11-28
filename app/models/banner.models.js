@@ -15,6 +15,7 @@ Banner.getAll = result => {
       console.log("Banner slider: ", res);
       result(null, res);
     });
+    
   };
 
 module.exports = Banner;
