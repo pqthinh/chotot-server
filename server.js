@@ -13,6 +13,8 @@ app.get("/", (req, res) => {
  
 require("./app/routes/news.routes.js")(app);
 require("./app/routes/banner.routes.js")(app);
+require("./app/routes/category.routes")(app);
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

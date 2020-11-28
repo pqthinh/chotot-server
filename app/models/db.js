@@ -17,18 +17,26 @@ function handleDisconnect() {
   connection.connect(error => {
     if (error) {
       console.log('error when connecting to db:', err);
-      setTimeout(handleDisconnect, 2000);
+      setTimeout(handleDisconnect, 2000)
     }
-    console.log("Successfully connected to the database.");
+    console.log("Successfully connected to the database.")
 
   });                                 
                                           
   connection.on('error', function(err) {
       console.log('db error', err);
-      if(err.code === 'PROTOCOL_CONNECTION_LOST') { 
+      // err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR'
+      if(err) { 
+          connection.end(function(err) {
+            if (err) {
+              return console.log('error:' + err.message);
+            }
+            console.log('Close the database connection.');
+          });
           handleDisconnect();                         
-      } else {                                      
-          throw err;                                  
+      } else {           
+          console.log(err)                           
+          throw err                               
       }
   });
 }

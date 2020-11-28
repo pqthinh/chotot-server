@@ -21,9 +21,8 @@ News.getAll = result => {
     });
   };
 
-
- News.findById = (newsid, result) => {
-    sql.query(`SELECT * FROM tindang WHERE id_tindang = ${newsid}`, (err, res) => {
+News.findById = (newsId, result) => {
+    sql.query(`SELECT * FROM tindang where id_tindang = ${newsId}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);

@@ -1,22 +1,21 @@
 const sql = require("./db.js");
 const Banner = function(banner)
 {
-    this.id = banner.id;
-    this.name = banner.id;
-    this.description = banner.description;
-    this.image = banner.image;
+    this.id_banner = banner.id_banne;
+    this.link = banner.link;
 }
+
 Banner.getAll = result => {
-    sql.query("SELECT * FROM danhmuctin", (err, res) => {
+    sql.query("SELECT link FROM `banner_images` where chucnang=1", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
         return;
       }
-      console.log("Danh muc tin: ", res);
+      console.log("Banner slider: ", res);
       result(null, res);
     });
     
   };
 
-  module.exports = Banner;
+module.exports = Banner;
