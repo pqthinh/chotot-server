@@ -4,4 +4,5 @@ module.exports = app => {
     app.get("/tindang/:newsId", news.findOne);
     app.get("/search", news.search);
     app.post("/tindang", news.create);
+    app.put("/tindang/:id", news.update);
   };

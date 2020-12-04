@@ -1,5 +1,5 @@
 const News = require("../models/news.models.js");
-
+var mv = require('mv');
 exports.findAll = (req, res) => {
     News.getAll((err, data) => {
       if (err)
@@ -17,20 +17,16 @@ exports.create = (req, res) => {
       message: "Content can not be empty!"
     });
   }
-
   const news = new News({
     ten: req.body.ten,
     idnguoiban: req.body.idnguoiban,
-    id_tindang: req.body.id_tindang,
     diadiem: req.body.diadiem,
     giaban: req.body.giaban,
     ngaydangtin: req.body.ngaydangtin,
-    anh: req.body.anh,
     tendanhmuc: req.body.tendanhmuc,
     loaitin: req.body.loaitin,
     trangthai: req.body.trangthai
   });
-
   News.create(news, (err, data) => {
     if (err)
       res.status(500).send({
@@ -38,8 +34,11 @@ exports.create = (req, res) => {
           err.message || "Some error occurred while creating the News."
       });
     else res.send(data);
-  });
+  });                        
 };
+
+
+
 
 exports.search = (req, res) => {
   News.search(req ,(err, data) => {
@@ -67,4 +66,31 @@ exports.findOne = (req, res) => {
         }
       } else res.send(data);
     });
+  };
+
+  exports.update = (req, res) => {
+    // Validate Request
+    if (!req.body) {
+      res.status(400).send({
+        message: "Content can not be empty!"
+      });
+    }
+  
+    News.updateById(
+      req.params.id,
+      new News(req.body),
+      (err, data) => {
+        if (err) {
+          if (err.kind === "not_found") {
+            res.status(404).send({
+              message: `Not found news with id ${req.params.id}.`
+            });
+          } else {
+            res.status(500).send({
+              message: "Error updating Customer with id " + req.params.id
+            });
+          }
+        } else res.send(data);
+      }
+    );
   };

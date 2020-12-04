@@ -1,12 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const fileUpload = require("express-fileupload");
+const path = require('path');
 const app = express();
 
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(fileUpload());
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to my app" });
 });
