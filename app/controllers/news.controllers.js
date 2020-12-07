@@ -1,5 +1,4 @@
 const News = require("../models/news.models.js");
-var mv = require('mv');
 exports.findAll = (req, res) => {
     News.getAll((err, data) => {
       if (err)

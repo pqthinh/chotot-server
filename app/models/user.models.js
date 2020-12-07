@@ -1,63 +1,61 @@
-const { urlencoded, query } = require('express')
-const sql = require( './db')
+const sql = require("./db.js");
 
-const user = {
-    getAll : (req, res, next) =>{ 
-        let cm = `select * from user `
-        sql.query(cm, (err, result) =>{
-            if (err) {
-                console.log("error: ", err);
-                next(null, err);
-                return;
-            }
-            console.log("User: ", result);
-            res.json({user: result})
-            next(null, result);
-        })
-    },
-    login :  (req, res, next) =>{
-        const email = req.body.email, password = req.body.password
-        if(!email || !password) {
-            res.status(400).send({ 
-                message:
-                err.message || "Email hoac mat khau la bat buoc nhap"
-            });
+// constructor
+const User = function(user) {
+  this.email = user.email;
+  this.name = user.name;
+  this.mobile = user.mobile;
+  this.password = user.password;
+  this.status = user.status;
+  this.role = user.role;
+  this.avatar = user.avatar;
+};
+
+
+User.getAll = result => {
+  sql.query("SELECT * FROM user", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("Users: ", res);
+    result(null, res);
+  });
+};
+
+
+User.login_ = (email, password, result) => {
+    let cm = `select * from user where email = ? and password = ?`;
+    // cm = `select * from user where email = ${email} and password = ${password}`
+    sql.query(cm, [email, password], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
         }
-        let cm = `select * from user where email = ? and password = ?`
-        // cm = `select * from user where email = ${email} and password = ${password}`
-        sql.query(cm, [email, password], (err, result) => {
-            if (err) {
-                console.log("error: ", err);
-                next(null, err);
-                return;
-            }
-            else {
-                // const result = sql.query(query)
-                console.log(result.length == 0)
+        if (res.length == 1) {
+            console.log("Dang nhap thanh cong");
+            result(null, res[0]);
+        }
+        else
+        {
+            result({ kind: "Email hoac mat khau khong dung" }, null);
+        }
+    });
+};
 
-                if(result.length == 0) {
-                    res.json({ 
-                        message: "Email hoac mat khau khong dung"
-                    });
-                    next(null, result);
-                }
-                else if(result.length > 1) {
-                    res.json({ message: "Loi he thong" });
-                    next(null, result);
-                } else if (result.length ==1 ){
-                    res.json(
-                        {
-                            message: "Dang nhap thanh cong",
-                            user: result
-                        }
-                    )
-                    next(null, result);
-                }
-                
-            }
-        })
-        
-    },
-    
-}
-module.exports = user
+User.create = (newNews, result) => {
+  sql.query("INSERT INTO user SET ?", newNews, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    console.log("created user: ", { id: res.insertId, ...newNews });
+    result(null, { id: res.insertId, ...newNews });
+  });
+};
+
+module.exports = User;
