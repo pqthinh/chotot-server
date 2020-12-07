@@ -5,3 +5,5 @@
 
 ### run 
 `npm start`
+
+### Sua lai config mysql 

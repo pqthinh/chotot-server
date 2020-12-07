@@ -12,7 +12,7 @@ const News = function(news)
     this.loaitin = news.loaitin;
 }
 News.getAll = result => {
-    sql.query("SELECT * FROM tindang", (err, res) => {
+    sql.query("SELECT * FROM tindang order by id_tindang desc", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);

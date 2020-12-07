@@ -1,4 +1,3 @@
-const { urlencoded, query } = require('express')
 const sql = require( './db')
 
 const user = {
