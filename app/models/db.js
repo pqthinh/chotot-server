@@ -16,7 +16,7 @@ function handleDisconnect() {
   // open the MySQL connection
   connection.connect(error => {
     if (error) {
-      console.log('error when connecting to db:', err);
+      console.log('error when connecting to db:', error);
       setTimeout(handleDisconnect, 2000)
     }
     console.log("Successfully connected to the database.")
