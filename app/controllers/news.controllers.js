@@ -24,7 +24,8 @@ exports.create = (req, res) => {
     ngaydangtin: req.body.ngaydangtin,
     tendanhmuc: req.body.tendanhmuc,
     loaitin: req.body.loaitin,
-    trangthai: req.body.trangthai
+    trangthai: req.body.trangthai,
+    anh: req.body.anh
   });
   News.create(news, (err, data) => {
     if (err)

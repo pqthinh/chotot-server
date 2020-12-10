@@ -9,6 +9,7 @@ const News = function(news)
     this.ngaydangtin = news.ngaydangtin;
     this.tendanhmuc = news.tendanhmuc;
     this.trangthai = news.trangthai;
+    this.anh = news.anh;
     this.loaitin = news.loaitin;
 }
 News.getAll = result => {
@@ -32,7 +33,7 @@ News.getAll = result => {
       }
   
       console.log("created news: ", { id_tindang: res.insertId, ...newNews });
-      result(null, { id_tindang: res.insertId, ...newNews });
+      result(null, { message: "Them tin dang thanh cong!" });
     });
   };
 
@@ -57,8 +58,8 @@ News.findById = (newsId, result) => {
 
   News.updateById = (id, news, result) => {
     sql.query(
-      "UPDATE tindang SET ten = ?, diadiem = ?, giaban = ?, ngaydangtin = ?, tendanhmuc = ?, trangthai = ?, loaitin = ?  WHERE id_tindang = ?",
-      [news.ten, news.diadiem,news.giaban,news.ngaydangtin,news.tendanhmuc,news.trangthai, news.loaitin, id],
+      "UPDATE tindang SET ten = ?, diadiem = ?, giaban = ?, ngaydangtin = ?, tendanhmuc = ?, trangthai = ?, loaitin = ?, anh = ?  WHERE id_tindang = ?",
+      [news.ten, news.diadiem,news.giaban,news.ngaydangtin,news.tendanhmuc,news.trangthai, news.loaitin,news.anh, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);
@@ -72,8 +73,8 @@ News.findById = (newsId, result) => {
           return;
         }
   
-        console.log("updated news: ", { id: id, ...news });
-        result(null, { id: id, ...news });
+        console.log("updated news: ", { id_tindang: id, ...news });
+        result(null, { id_tindang: id});
       }
     );
   };
