@@ -16,6 +16,9 @@ require("./app/routes/category.routes")(app);
 require("./app/routes/user.routes")(app)
 require("./app/routes/images.route")(app)
 
+app.get('/', (req,res)=>{
+  res.json({send:"Welcome to my app"});
+})
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);  

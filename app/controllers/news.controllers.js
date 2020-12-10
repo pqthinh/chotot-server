@@ -75,9 +75,7 @@ exports.findOne = (req, res) => {
       });
     }
   
-    News.updateById(
-      req.params.id,
-      new News(req.body),
+    News.updateById(req.params.id, new News(req.body),
       (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
