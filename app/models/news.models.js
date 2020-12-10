@@ -31,8 +31,8 @@ News.getAll = result => {
         return;
       }
   
-      console.log("created news: ", { id: res.insertId, ...newNews });
-      result(null, { id: res.insertId, ...newNews });
+      console.log("created news: ", { id_tindang: res.insertId, ...newNews });
+      result(null, { id_tindang: res.insertId, ...newNews });
     });
   };
 
