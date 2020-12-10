@@ -17,7 +17,7 @@ function handleDisconnect() {
   connection.connect(error => {
     if (error) {
       console.log('error when connecting to db:', error);
-      setTimeout(handleDisconnect, 2000)
+      setTimeout(handleDisconnect, 60000)
     }
     console.log("Successfully connected to the database.")
 
