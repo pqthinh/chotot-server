@@ -33,7 +33,7 @@ News.getAll = result => {
       }
   
       console.log("created news: ", { id_tindang: res.insertId, ...newNews });
-      result(null, { message: "Them tin dang thanh cong!" });
+      result(null, { id_tindang: res.insertId });
     });
   };
 
