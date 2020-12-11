@@ -12,7 +12,7 @@ const News = function(news)
     this.loaitin = news.loaitin;
 }
 News.getAll = result => {
-    sql.query("SELECT * FROM tindang order by id_tindang desc", (err, res) => {
+    sql.query("SELECT * FROM tindang t join user u on t.idnguoiban = u.id  order by id_tindang desc", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -37,7 +37,7 @@ News.getAll = result => {
   };
 
 News.findById = (newsId, result) => {
-    sql.query(`SELECT * FROM tindang where id_tindang = ${newsId}`, (err, res) => {
+    sql.query(`SELECT * FROM tindang t join user u on t.idnguoiban = u.id where id_tindang = ${newsId}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
