@@ -85,6 +85,7 @@ News.search = (req, result) => {
   var type = req.query.type;
   var address = req.query.address;
   var state = req.query.state;
+  var owner = req.query.owner;
   var qr = "SELECT * FROM tindang WHERE 1";
   if (min_price !== undefined)
   {
@@ -106,6 +107,10 @@ News.search = (req, result) => {
   if (state !== undefined)
   {
     qr = qr.concat(" AND trangthai = ",state);
+  }
+  if (owner !== undefined)
+  {
+    qr = qr.concat(" AND idnguoiban = ",owner);
   }
   sql.query(qr,(err, res) => {
     if (err) {
