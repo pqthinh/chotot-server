@@ -31,6 +31,16 @@ exports.create = (req, res) => {
 };
 
 
+exports.search = (req, res) => {
+  Mark.search(req ,(err, data) => {
+    if (err)
+      res.status(500).send({ 
+        message:
+          err.message || "Some error occurred while retrieving mark."
+      });
+    else res.send(data);
+  });
+};
 
 exports.delete = (req, res) => {
   const mark = new Mark({
