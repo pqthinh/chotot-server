@@ -78,7 +78,32 @@ News.findById = (newsId, result) => {
       }
     );
   };
+
+  News.updateImageById = (id, image, result) => {
+    sql.query(
+      "UPDATE tindang SET anh = ?  WHERE id_tindang = ?",
+      [image, id],
+      (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+          result(null, err);
+          return;
+        }
   
+        if (res.affectedRows == 0) {
+          // not found news with the id
+          result({ kind: "not_found" }, null);
+          return;
+        }
+  
+        console.log("updated news: ", { id_tindang: id});
+        result(null, { id_tindang: id});
+      }
+    );
+  };
+
+
+
 News.search = (req, result) => {
   var min_price = req.query.min_price;
   var max_price = req.query.max_price;
