@@ -6,6 +6,7 @@ const News = function(news)
     this.idnguoiban = news.idnguoiban;
     this.diadiem = news.diadiem;
     this.giaban = news.giaban;
+    this.describe = news.describe;
     this.ngaydangtin = news.ngaydangtin;
     this.tendanhmuc = news.tendanhmuc;
     this.trangthai = news.trangthai;
