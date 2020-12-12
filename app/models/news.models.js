@@ -26,6 +26,10 @@ News.getAll = result => {
   };
 
   News.create = (newNews, result) => {
+    delete newNews.id_tindang;
+    delete newNews.ngaydangtin;
+    delete newNews.trangthai;
+    console.log(newNews)
     sql.query("INSERT INTO tindang SET ?", newNews, (err, res) => {
       if (err) {
         console.log("error: ", err);

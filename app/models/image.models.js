@@ -20,10 +20,10 @@ const image = {
                         return res.status(500).send(err);
                     }
                 });
-                arr.push(`${baseUrl}/${link}}`)
+                arr.push(`${baseUrl}/${link}`)
             })
         else {
-            var link = `data/uploads/image/${new Date().getTime() +"_"+ file.name }`
+            var link = `data/uploads/image/${new Date().getTime() +"_"+ file.name}`
             file.mv(`${__dirname}/../../${link}`, err => {
                 if (err) {
                     console.error(err);
