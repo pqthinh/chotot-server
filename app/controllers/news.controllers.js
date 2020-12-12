@@ -21,6 +21,7 @@ exports.create = (req, res) => {
     idnguoiban: req.body.idnguoiban,
     diadiem: req.body.diadiem,
     giaban: req.body.giaban,
+    describe: req.body.mieuta,
     ngaydangtin: req.body.ngaydangtin,
     tendanhmuc: req.body.tendanhmuc,
     loaitin: req.body.loaitin,
