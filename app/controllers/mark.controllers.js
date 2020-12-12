@@ -42,6 +42,17 @@ exports.search = (req, res) => {
   });
 };
 
+exports.getArr = (req, res) => {
+  Mark.getArrTindaluu(req ,(err, data) => {
+    if (err)
+      res.status(500).send({ 
+        message:
+          err.message || "Some error occurred while retrieving mark."
+      });
+    else res.send(data);
+  });
+};
+
 exports.delete = (req, res) => {
   const mark = new Mark({
     id_tindang: req.body.id_tindang,

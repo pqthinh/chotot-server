@@ -3,4 +3,5 @@ module.exports = app => {
     app.get("/mark", mark.search);
     app.post("/mark", mark.create);
     app.delete("/mark", mark.delete)
+    app.get("/arrtindaluu/all", mark.getArr)
 };

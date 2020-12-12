@@ -55,7 +55,7 @@ Mark.remove = (mark,result) => {
   Mark.search = (req, result) => {
     var id_nguoiluutin = req.query.id_nguoiluutin;
 
-    var qr = "SELECT * FROM tindaluu t LEFT JOIN tindang td ON t.id_tindang = td.id_tindang WHERE 1";
+    var qr = "SELECT * FROM tindaluu t JOIN tindang td ON t.id_tindang = td.id_tindang join user u on u.id  = t.id_nguoiluutin WHERE 1 ";
     if (id_nguoiluutin !== undefined)
     {
       qr = qr.concat(" AND id_nguoiluutin = ",id_nguoiluutin);
@@ -68,6 +68,21 @@ Mark.remove = (mark,result) => {
         return;
       }
       console.log(qr, res);
+      result(null, res);
+    });
+  };
+  Mark.getArrTindaluu = (req, result) => {
+    var id_nguoiluutin = req.query.id_nguoiluutin;
+
+    var qr = `SELECT id_tindang FROM tindaluu  WHERE id_nguoiluutin  = ${id_nguoiluutin}`;
+
+    sql.query(qr,(err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log(qr);
       result(null, res);
     });
   };
