@@ -6,6 +6,7 @@ const News = function(news)
     this.idnguoiban = news.idnguoiban;
     this.diadiem = news.diadiem;
     this.giaban = news.giaban;
+    this.describe = news.describe;
     this.ngaydangtin = news.ngaydangtin;
     this.tendanhmuc = news.tendanhmuc;
     this.trangthai = news.trangthai;
@@ -13,18 +14,22 @@ const News = function(news)
     this.loaitin = news.loaitin;
 }
 News.getAll = result => {
-    sql.query("SELECT * FROM tindang order by id_tindang desc", (err, res) => {
+    sql.query("SELECT * FROM tindang t join user u on t.idnguoiban = u.id  order by id_tindang desc", (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
         return;
       }
-      console.log("Tin dang: ", res);
+      console.log("Tin dang: ", res.length);
       result(null, res);
     });
   };
 
   News.create = (newNews, result) => {
+    delete newNews.id_tindang;
+    delete newNews.ngaydangtin;
+    delete newNews.trangthai;
+    console.log(newNews)
     sql.query("INSERT INTO tindang SET ?", newNews, (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -38,7 +43,7 @@ News.getAll = result => {
   };
 
 News.findById = (newsId, result) => {
-    sql.query(`SELECT * FROM tindang where id_tindang = ${newsId}`, (err, res) => {
+    sql.query(`SELECT * FROM tindang t join user u on t.idnguoiban = u.id where id_tindang = ${newsId}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
@@ -105,37 +110,54 @@ News.findById = (newsId, result) => {
 
 
 News.search = (req, result) => {
+  var tensp = req.query.tensp;
   var min_price = req.query.min_price;
   var max_price = req.query.max_price;
   var type = req.query.type;
   var address = req.query.address;
   var state = req.query.state;
   var owner = req.query.owner;
-  var qr = "SELECT * FROM tindang WHERE 1";
-  if (min_price !== undefined)
+  var sort = req.query.sort;
+  var loaitin = req.query.loaitin
+  console.log(req.query)
+  var qr = "SELECT * FROM tindang t join user u on t.idnguoiban = u.id WHERE 1";
+  if (min_price &&  min_price !== "undefined" && loaitin !== "Cần mua")
   {
-    qr = qr.concat(" AND giaban > ",min_price);
+    qr += ` AND giaban between ${min_price} and ${max_price}`
   }
 
-  if (max_price !== undefined)
+  if (type &&  type !== "undefined")
   {
-    qr = qr.concat(" AND giaban < ",max_price);
+    qr += ` AND tendanhmuc LIKE  '%${type}%'`;
   }
-  if (type !== undefined)
+  if (address &&  address !== "undefined" && address !== "null")
   {
-    qr = qr.concat(" AND tendanhmuc LIKE ",type);
+    qr += ` AND diadiem LIKE  '%${address}%'`;
   }
-  if (address !== undefined)
-  {
-    qr = qr.concat(" AND diadiem LIKE ",address);
-  }
-  if (state !== undefined)
+  if (state &&  state!== "undefined")
   {
     qr = qr.concat(" AND trangthai = ",state);
   }
-  if (owner !== undefined)
+  if (owner &&  owner!== "undefined")
   {
     qr = qr.concat(" AND idnguoiban = ",owner);
+  }
+  if (tensp &&  tensp !== "undefined")
+  {
+    qr += ` AND ten LIKE  '%${tensp}%'`;
+  }
+
+  if (sort)
+  {
+    if(sort==="cost")
+      qr += ` order by giaban `;
+    else if(sort === "time")
+      qr += ` order by ngaycapnhat desc`;
+  }
+
+  if(loaitin && loaitin !== "null") {
+    if(loaitin==="Cần bán" || loaitin === "Cần mua")
+      qr += ` and loaitin = '${loaitin}' `;
   }
   sql.query(qr,(err, res) => {
     if (err) {
@@ -143,7 +165,7 @@ News.search = (req, result) => {
       result(null, err);
       return;
     }
-    console.log(qr, res);
+    console.log(qr);
     result(null, res);
   });
 };

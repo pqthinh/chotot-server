@@ -15,7 +15,7 @@ require("./app/routes/banner.routes.js")(app);
 require("./app/routes/category.routes")(app);
 require("./app/routes/user.routes")(app)
 require("./app/routes/images.route")(app)
-
+require("./app/routes/mark.routes")(app)
 app.get('/', (req,res)=>{
   res.json({send:"Welcome to my app"});
 })
