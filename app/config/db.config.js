@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 // remotemysql
 const dbrm = {
     HOST: "remotemysql.com",
@@ -6,11 +7,14 @@ const dbrm = {
     DB: "ZduVtEX3Nd"
 }
 // database localhost
+=======
+>>>>>>> Stashed changes
 const db = {
-    HOST: "192.168.101.109",
-    USER: "root",
-    PASSWORD: "",
-    DB: "chotot"
+    HOST: "remotemysql.com",
+    USER: "ZduVtEX3Nd",
+    PASSWORD: "bleVGxRMN2",
+    DB: "ZduVtEX3Nd"
 }
+
 
 module.exports = db
