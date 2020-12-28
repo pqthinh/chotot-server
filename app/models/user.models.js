@@ -58,4 +58,25 @@ User.create = (newNews, result) => {
   });
 };
 
+User.updateById = (id, password, result) => {
+  sql.query(
+    "UPDATE user SET password = ?  WHERE id = ?",
+    [password, id],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows == 0) {
+        // not found news with the id
+        result({ kind: "not_found" }, null);
+        return;
+      }
+      result(null, { message: "Mat khau da duoc thay doi thanh cong"});
+    }
+  );
+};
+
 module.exports = User;

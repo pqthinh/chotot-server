@@ -3,4 +3,5 @@ module.exports = app => {
     app.get("/user/all", user.findAll);
     app.post("/user/create", user.create);
     app.post("/user/login", user.login);
+    app.put("/user/:id", user.updatePassword);
 };
