@@ -6,5 +6,5 @@ module.exports = app => {
     app.post("/tindang", news.create);
     app.put("/tindang/:id", news.update);
     app.put("/updateimage/:id", news.updateimage);
-    
+    app.get("/update_state/:id", news.updateState)
 };

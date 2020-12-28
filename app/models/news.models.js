@@ -61,6 +61,22 @@ News.findById = (newsId, result) => {
     });
   };
 
+  News.updateStateById = (id, result) => {
+    sql.query("UPDATE tindang SET trangthai = 3", (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+  
+      if (res.affectedRows == 0) {
+        // not found news with the id
+        result({ kind: "not_found" }, null);
+        return;
+      }
+      result(null, { id_tindang: id});
+    });
+  };
   News.updateById = (id, news, result) => {
     sql.query(
       "UPDATE tindang SET ten = ?, diadiem = ?, giaban = ?, ngaydangtin = ?, tendanhmuc = ?, trangthai = ?, loaitin = ?, anh = ?  WHERE id_tindang = ?",

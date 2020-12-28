@@ -6,11 +6,18 @@ const dbrm = {
     DB: "ZduVtEX3Nd"
 }
 // database localhost
+// const db = {
+//     HOST: "192.168.101.109",
+//     USER: "root",
+//     PASSWORD: "",
+//     DB: "chotot"
+// }
+
 const db = {
-    HOST: "192.168.101.109",
+    HOST: "localhost",
     USER: "root",
-    PASSWORD: "",
-    DB: "chotot"
+    PASSWORD: "121226",
+    DB: "app"
 }
 
 module.exports = db
